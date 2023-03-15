@@ -1,0 +1,18 @@
+$svg = new EasySVG();
+$svg->setFontSVG($svgFont->filename);
+$svg->setFontSize(100);
+$svg->setFontColor('#000000');
+$svg->setLineHeight(0);
+$svg->setUseKerning(true);
+$svg->addText($demoText);
+list($textWidth, $textHeight) = $svg->textDimensions($demoText);
+
+// Set the 'viewBox' attribute to fit the content
+$svg->addAttribute("viewBox", "0 0 $textWidth $textHeight");
+
+// Remove any existing 'width' and 'height' attributes to allow the SVG to auto-resize
+$svg->removeAttribute("width");
+$svg->removeAttribute("height");
+
+// Set the 'preserveAspectRatio' attribute to ensure the content scales proportionally
+$svg->addAttribute("preserveAspectRatio", "xMinYMin meet");
